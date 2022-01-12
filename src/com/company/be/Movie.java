@@ -1,20 +1,30 @@
 package com.company.be;
 
+import java.io.File;
+import java.util.Date;
+
 public class Movie {
 
     private int Id;
     private String name;
     private double rating;
     private String filelink;
-    private String lastview;
+    private Date lastview;
 
 
-    public Movie(int id, String name, int rating, String filelink, String lastview) {
+    public Movie(int id, String name, Double rating, String filelink, Date lastview) {
         Id = id;
         this.name = name;
         this.rating = rating;
         this.filelink = filelink;
         this.lastview = lastview;
+    }
+
+
+    public Movie(int id, String name, String filelink) {
+        Id = id;
+        this.name = name;
+        this.filelink = filelink;
     }
 
     public int getId() {
@@ -30,6 +40,7 @@ public class Movie {
         this.name = name;
     }
 
+
     public double getRating() {
         return rating;
     }
@@ -37,6 +48,7 @@ public class Movie {
     public void setRating(int rating) {
         this.rating = rating;
     }
+
 
     public String getFilelink() {
         return filelink;
@@ -46,11 +58,24 @@ public class Movie {
         this.filelink = filelink;
     }
 
-    public String getLastview() {
+
+    public Date getLastview() {
         return lastview;
     }
 
-    public void setLastview(String lastview) {
+    public void setLastview(Date lastview) {
         this.lastview = lastview;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "Id=" + Id +
+                ", name='" + name + '\'' +
+                ", rating=" + rating +
+                ", filelink='" + filelink + '\'' +
+                ", lastview=" + lastview +
+                '}';
     }
 }

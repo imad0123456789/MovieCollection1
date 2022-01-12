@@ -1,4 +1,4 @@
-package com.company.dal;
+package com.company.dal.dao;
 
 public class ExceotionDAO extends Exception {
 

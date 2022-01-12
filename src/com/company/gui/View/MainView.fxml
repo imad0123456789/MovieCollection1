@@ -10,32 +10,36 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.gui.Controller.MainController">
    <children>
-      <TableView layoutX="448.0" layoutY="142.0" prefHeight="413.0" prefWidth="332.0" style="-fx-background-radius: 25;">
+      <TableView fx:id="moviesTabelView" layoutX="441.0" layoutY="142.0" prefHeight="413.0" prefWidth="339.0" style="-fx-background-radius: 10;">
         <columns>
-          <TableColumn prefWidth="132.0" text="Name" />
-          <TableColumn prefWidth="51.0" text="Rating" />
-            <TableColumn text="Filelink" />
-            <TableColumn prefWidth="68.0" text="lastview" />
+          <TableColumn fx:id="movieNameColumn" prefWidth="89.0" text="Name" />
+          <TableColumn fx:id="movieRatingColumn" prefWidth="45.0" text="Rating" />
+            <TableColumn fx:id="movieUrlColumn" prefWidth="135.0" text="Filelink" />
+            <TableColumn fx:id="movieLastviewColumn" prefWidth="69.0" text="lastview" />
         </columns>
       </TableView>
-      <TableView layoutX="20.0" layoutY="142.0" prefHeight="413.0" prefWidth="126.0" style="-fx-background-radius: 25;">
+      <TableView fx:id="categoryTableView" layoutX="20.0" layoutY="142.0" onMouseClicked="#displayMovieInPlaylist" prefHeight="413.0" prefWidth="126.0" style="-fx-background-radius: 10;">
         <columns>
-          <TableColumn prefWidth="124.0" text="Category" />
+          <TableColumn fx:id="CategoryNames" prefWidth="124.0" text="Category" />
         </columns>
       </TableView>
-      <TableView layoutX="160.0" layoutY="142.0" prefHeight="413.0" prefWidth="253.0" style="-fx-background-radius: 25;">
+      <TableView fx:id="movieInPlaylist" layoutX="160.0" layoutY="142.0" prefHeight="413.0" prefWidth="228.0" style="-fx-background-radius: 10;">
         <columns>
-          <TableColumn prefWidth="75.0" text="#" />
-          <TableColumn prefWidth="195.0" text="Movie Title" />
+          <TableColumn fx:id="moviesInCategory" prefWidth="55.0" text="#" />
+          <TableColumn fx:id="CatMovieName" prefWidth="215.0" text="Movie Title" />
         </columns>
       </TableView>
       <Button layoutX="728.0" layoutY="62.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" style="-fx-background-radius: 100;" text="🔎" />
-      <Label layoutX="586.0" layoutY="41.0" prefHeight="25.0" prefWidth="142.0" text="Movies Search">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
+      <Label layoutX="573.0" layoutY="41.0" prefHeight="25.0" prefWidth="142.0" text="Movies Search" />
       <TextField layoutX="571.0" layoutY="66.0" />
-      <Button layoutX="413.0" layoutY="349.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="36.0" text="⬅" />
+      <Button layoutX="389.0" layoutY="349.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" text="⬅" />
+      <Button fx:id="NewMovie" layoutX="468.0" layoutY="557.0" mnemonicParsing="false" onAction="#clickNewMovie" text="New" />
+      <Button layoutX="522.0" layoutY="557.0" mnemonicParsing="false" text="Delete" />
+      <Button layoutX="587.0" layoutY="557.0" mnemonicParsing="false" text="Update" />
+      <Button fx:id="PlayBut" layoutX="96.0" layoutY="41.0" minWidth="35.0" mnemonicParsing="false" onAction="#playMovie" prefHeight="51.0" prefWidth="50.0" style="-fx-background-radius: 100;" text="▶">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

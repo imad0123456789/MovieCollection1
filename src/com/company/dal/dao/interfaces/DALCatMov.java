@@ -1,14 +1,15 @@
-package com.company.dal;
+package com.company.dal.dao.interfaces;
 
 
 import com.company.be.Category;
 import com.company.be.Movie;
+import com.company.dal.dao.ExceotionDAO;
 
 import java.util.List;
 
 public interface DALCatMov {
 
-    public List<Movie> GetMovieInCat() throws ExceotionDAO;
+    public List<Movie> GetMovieInCat(int Id) throws ExceotionDAO;
 
     public void addMovieToCat(Category category , Movie movie) throws ExceotionDAO;
 

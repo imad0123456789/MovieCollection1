@@ -1,38 +1,40 @@
-package com.company.bll;
+package com.company.dal;
 
 import com.company.be.Movie;
-import com.company.dal.DalManager;
-import com.company.dal.IDALManager;
 import com.company.dal.dao.ExceotionDAO;
 import com.company.dal.dao.MovieDAO;
 
 import java.util.List;
 
-public class MovieManger implements IMovieManager {
+public class DalManager implements IDALManager{
 
-    IDALManager dalManager = new DalManager();
+    private MovieDAO movieDao;
+    private static MyDatabaseConnector databaseConnector;
+
+    public DalManager() {
+        databaseConnector = new MyDatabaseConnector();
+        this.movieDao = new MovieDAO(databaseConnector);
+    }
 
     @Override
     public List<Movie> getAllMovies() throws ExceotionDAO {
-        return dalManager.getAllMovies();
+        return movieDao.getAllMovies();
     }
 
     @Override
     public void add(String name, String filepath) throws ExceotionDAO {
-        dalManager.add(name,filepath);
+        movieDao.add(name,filepath);
     }
-
 
     @Override
     public void update(Movie movie) throws ExceotionDAO {
-        dalManager.update(movie);
+        movieDao.update(movie);
     }
 
     @Override
     public void delete(Movie movie) throws ExceotionDAO {
-        dalManager.delete(movie);
+        movieDao.delete(movie);
     }
-
 
     @Override
     public Movie changeRate(Movie movie, Double newRate) throws ExceotionDAO {
@@ -41,6 +43,6 @@ public class MovieManger implements IMovieManager {
 
     @Override
     public Movie changeDate(Movie movie) throws ExceotionDAO {
-        return dalManager.changeDate(movie);
+        return movieDao.changeDate(movie);
     }
 }
