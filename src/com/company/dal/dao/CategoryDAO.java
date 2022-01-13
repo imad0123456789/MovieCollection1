@@ -1,6 +1,7 @@
 package com.company.dal.dao;
 
 import com.company.be.Category;
+import com.company.be.Movie;
 import com.company.dal.dao.interfaces.DALCategory;
 import com.company.dal.MyDatabaseConnector;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -11,10 +12,15 @@ import java.util.List;
 
 public class CategoryDAO implements DALCategory {
 
-    private static MyDatabaseConnector databaseConnector;
+    private final CatMovDAO catMovDAO;
 
-    public CategoryDAO() {
-        databaseConnector = new MyDatabaseConnector();
+    private MyDatabaseConnector databaseConnector;
+
+
+    public CategoryDAO(CatMovDAO catMovDAO, MyDatabaseConnector databaseConnector) {
+        this.catMovDAO = catMovDAO;
+
+        this.databaseConnector = databaseConnector;
     }
 
     private Connection con;
@@ -31,6 +37,7 @@ public class CategoryDAO implements DALCategory {
                 String name = rs.getString("name");
 
                 Category category = new Category(id, name);
+                category.setAllMoviesInCategory(this.catMovDAO.GetMovieInCat(id));
                 categories.add(category);
             }
 
@@ -90,6 +97,15 @@ public class CategoryDAO implements DALCategory {
             throwables.printStackTrace();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addToCategory(Category selectedItem, Movie selectedMovie) throws ExceotionDAO {
+        try {
+            catMovDAO.addMovieToCat(selectedItem, selectedMovie);
+        } catch (ExceotionDAO exceotionDAO) {
+            exceotionDAO.printStackTrace();
         }
     }
 

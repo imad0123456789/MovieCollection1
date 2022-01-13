@@ -13,10 +13,10 @@ import java.util.List;
 
 public class CatMovDAO implements DALCatMov {
 
-    private static MyDatabaseConnector databaseConnector;
+    private MyDatabaseConnector databaseConnector;
 
-    public CatMovDAO() {
-        databaseConnector = new MyDatabaseConnector();
+    public CatMovDAO(MyDatabaseConnector databaseConnector) {
+        this.databaseConnector = databaseConnector;
     }
 
     private Connection con;
@@ -27,8 +27,9 @@ public class CatMovDAO implements DALCatMov {
         ArrayList<Movie> moviesInCat = new ArrayList<>();
         try (Connection con = databaseConnector.getConnection()) {
             String sql = "SELECT Movie.* FROM CatMovie INNER JOIN Movie ON CatMovie.MovieId = Movie.Id WHERE  CatMovie.CategoryId=? Order BY CategoryId desc;";
-            Statement statement = con.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, Id);
+            ResultSet rs = pst.executeQuery();
             while (rs.next()) {
 
                 int id = rs.getInt("Id");

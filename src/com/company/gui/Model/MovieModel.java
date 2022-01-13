@@ -2,20 +2,20 @@ package com.company.gui.Model;
 
 
 import com.company.be.Movie;
-import com.company.bll.IMovieManager;
-import com.company.bll.MovieManger;
+import com.company.bll.LogicInterfaceManager;
+import com.company.bll.Manger;
 import com.company.dal.dao.ExceotionDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class MovieModel {
 
-    private IMovieManager movieManger;
+    private Manger movieManger;
     private final ObservableList<Movie> movies;
 
 
     public MovieModel() throws ExceotionDAO {
-        movieManger = new MovieManger();
+        movieManger = new Manger();
         movies = FXCollections.observableArrayList();
         movies.addAll(movieManger.getAllMovies());
     }
@@ -26,27 +26,20 @@ public class MovieModel {
     }
 
 
-    /*
-    public void addMovie (String name, Double rating , String filelink , String lastview ) throws ExceotionDAO{
-        movieManger.add(new Movie(1, name,rating,filelink,lastview));
-        updatethelist();
-
-    }
-*/
 
     public void addMovie (String name, String filelink  ) throws ExceotionDAO{
-        movieManger.add(name, filelink);
+        movieManger.addMovie(name, filelink);
         updatethelist();
 
     }
 
     public void updateMovie(Movie movie, int selectedIndex) throws ExceotionDAO{
-        movieManger.update(movie);
+        movieManger.updateMovie(movie);
         updatethelist();
     }
 
     public void deleteMovie (Movie movie) throws ExceotionDAO{
-        movieManger.delete(movie);
+        movieManger.deleteMovie(movie);
         updatethelist();
     }
 

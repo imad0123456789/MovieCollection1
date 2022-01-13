@@ -1,12 +1,15 @@
-package com.company.dal;
+package com.company.bll;
 
 import com.company.be.Category;
 import com.company.be.Movie;
 import com.company.dal.dao.ExceotionDAO;
+import javafx.collections.ObservableList;
 
 import java.util.List;
 
-public interface IDALManager {
+public interface LogicInterfaceManager {
+
+    //Movie
     List<Movie> getAllMovies() throws ExceotionDAO;
 
     void addMovie (String name, String filepath) throws ExceotionDAO;
@@ -22,7 +25,10 @@ public interface IDALManager {
 
     Movie changeDate (Movie movie) throws ExceotionDAO;
 
+   public ObservableList<Movie> searchMovie(ObservableList<Movie> currentMovies, String movieToFind);
 
+
+    //Category
     List<Category> getAllCategory() throws ExceotionDAO;
 
 
@@ -32,13 +38,11 @@ public interface IDALManager {
 
     void deleteCategory (int categoryId) throws ExceotionDAO;
 
+
     public List<Movie> GetMovieInCat(int Id) throws ExceotionDAO;
 
     public void addMovieToCat(Category category , Movie movie) throws ExceotionDAO;
 
-
-
-    //remove Category
 
     public  void removeMovieFromCategory ( Movie movie)  throws ExceotionDAO;
 

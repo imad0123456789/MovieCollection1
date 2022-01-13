@@ -1,47 +1,52 @@
-package com.company.dal;
+package com.company.bll;
 
 import com.company.be.Category;
 import com.company.be.Movie;
-import com.company.dal.dao.CatMovDAO;
-import com.company.dal.dao.CategoryDAO;
+import com.company.bll.helper.MovieFilter;
+import com.company.dal.DalManager;
+import com.company.dal.IDALManager;
 import com.company.dal.dao.ExceotionDAO;
-import com.company.dal.dao.MovieDAO;
+import javafx.collections.ObservableList;
 
 import java.util.List;
 
-public class DalManager implements IDALManager{
+public class Manger implements LogicInterfaceManager {
 
-    private MovieDAO movieDao;
-    private CategoryDAO categoryDAO;
-    private CatMovDAO catMovDAO;
-    private static MyDatabaseConnector databaseConnector;
+    private final IDALManager dalManager;
 
-    public DalManager() {
-        databaseConnector = new MyDatabaseConnector();
-        this.movieDao = new MovieDAO(databaseConnector);
-        this.catMovDAO = new CatMovDAO(databaseConnector);
-        this.categoryDAO = new CategoryDAO(this.catMovDAO,databaseConnector);
+    private final MovieFilter searchforMovie;
+
+
+    //IDALManager dalManager = new DalManager();
+
+    public Manger() throws ExceotionDAO {
+        dalManager = new DalManager();
+        searchforMovie = new MovieFilter();
     }
+
+
 
     @Override
     public List<Movie> getAllMovies() throws ExceotionDAO {
-        return movieDao.getAllMovies();
+        return dalManager.getAllMovies();
     }
 
     @Override
     public void addMovie(String name, String filepath) throws ExceotionDAO {
-        movieDao.add(name,filepath);
+        dalManager.addMovie(name,filepath);
     }
+
 
     @Override
     public void updateMovie(Movie movie) throws ExceotionDAO {
-        movieDao.update(movie);
+        dalManager.updateMovie(movie);
     }
 
     @Override
     public void deleteMovie(Movie movie) throws ExceotionDAO {
-        movieDao.delete(movie);
+        dalManager.deleteMovie(movie);
     }
+
 
     @Override
     public Movie changeRate(Movie movie, Double newRate) throws ExceotionDAO {
@@ -50,28 +55,45 @@ public class DalManager implements IDALManager{
 
     @Override
     public Movie changeDate(Movie movie) throws ExceotionDAO {
-        return movieDao.changeDate(movie);
+        return dalManager.changeDate(movie);
+    }
+
+    @Override
+    public ObservableList<Movie> searchMovie(ObservableList<Movie> currentMovies, String movieToFind) {
+        return null;
     }
 
     @Override
     public List<Category> getAllCategory() throws ExceotionDAO {
-        return categoryDAO.getAllCategory();
+       try {
+           return dalManager.getAllCategory();
+       } catch (ExceotionDAO exceotionDAO) {
+           exceotionDAO.printStackTrace();
+       }
+        return null;
     }
+
 
     @Override
     public void addCategory(Category category) throws ExceotionDAO {
-
+        dalManager.addCategory(category);
     }
 
     @Override
     public void updateCategory(Category category) throws ExceotionDAO {
-
+        dalManager.updateCategory(category);
     }
 
     @Override
-    public void deleteCategory(int categoryId) throws ExceotionDAO {
-
+    public void deleteCategory(int categoryId)  {
+    try {
+        dalManager.deleteCategory(categoryId);
+    } catch (ExceotionDAO exceotionDAO) {
+        exceotionDAO.printStackTrace();
     }
+    }
+
+
 
     @Override
     public List<Movie> GetMovieInCat(int Id) throws ExceotionDAO {
@@ -80,7 +102,7 @@ public class DalManager implements IDALManager{
 
     @Override
     public void addMovieToCat(Category category, Movie movie) throws ExceotionDAO {
-        catMovDAO.addMovieToCat(category,movie);
+        dalManager.addMovieToCat(category,movie);
     }
 
     @Override

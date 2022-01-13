@@ -3,9 +3,9 @@ package com.company.gui.Controller;
 import com.company.be.Category;
 import com.company.be.Movie;
 import com.company.dal.dao.ExceotionDAO;
+import com.company.dal.dao.interfaces.DALCategory;
 import com.company.gui.Model.CategoryModel;
 import com.company.gui.Model.MovieModel;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +13,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -25,6 +24,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -32,12 +32,13 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
+    public TableColumn<Movie, Integer> moviesInCategory;
     @FXML
     private Button NewMovie;
     @FXML
     private TableColumn<Movie, String> CatMovieName;
     @FXML
-    private TableView<Category> categoryTableView ;
+    private TableView<Category> categoryTableView;
     @FXML
     private TableColumn<Category, String> CategoryNames;
     @FXML
@@ -60,10 +61,9 @@ public class MainController implements Initializable {
     private ObservableList<Category> observableListCategory;
 
     private MovieModel movieModel = new MovieModel();
+
     private CategoryModel categoryModel = new CategoryModel();
-    private Object IllegalArgumentException;
-    private Object IOException;
-    private Object ExceotionDAO;
+
 
     public MainController() throws ExceotionDAO {
         //List<Movie> listMov = movieModel.getMovies();
@@ -99,13 +99,11 @@ public class MainController implements Initializable {
         categoryTableView.setItems(observableListCategory);
         CategoryNames.setCellValueFactory(new PropertyValueFactory<>("name"));
 
+        moviesInCategory.setCellValueFactory(new PropertyValueFactory<>("Id"));
         CatMovieName.setCellValueFactory(new PropertyValueFactory<>("name"));
 
 
     }
-
-
-
 
 
     public void clickNewMovie(javafx.event.ActionEvent actionEvent) throws IOException {
@@ -118,21 +116,9 @@ public class MainController implements Initializable {
     }
 
 
-    @FXML
-    void displayMovieInPlaylist(MouseEvent event) {
-        movieInPlaylist.getItems().clear();
-        List<Movie> toBeAddedMovieList = categoryTableView.getSelectionModel().getSelectedItem().getAllMoviesInCategory();
-        for ( Movie m : categoryTableView.getSelectionModel().getSelectedItem().getAllMoviesInCategory()){
-            movieInPlaylist.getItems().add(m);
-        }
-
-    }
-
-
     public void displayMovieInPlaylist(javafx.scene.input.MouseEvent event) {
         movieInPlaylist.getItems().clear();
-        List<Movie> toBeAddedMovieList = categoryTableView.getSelectionModel().getSelectedItem().getAllMoviesInCategory();
-        for ( Movie m : categoryTableView.getSelectionModel().getSelectedItem().getAllMoviesInCategory()){
+        for (Movie m : categoryTableView.getSelectionModel().getSelectedItem().getAllMoviesInCategory()) {
             movieInPlaylist.getItems().add(m);
         }
     }
@@ -146,6 +132,13 @@ public class MainController implements Initializable {
 
     }
 
+    private void refresh(){
+        movieInPlaylist.getItems().clear();
+        for (Movie m : categoryTableView.getSelectionModel().getSelectedItem().getAllMoviesInCategory()) {
+            movieInPlaylist.getItems().add(m);
+        }
+    }
+
     private void play() throws IOException, ExceotionDAO {
 
         //Desktop.getDesktop().open(new File(movieInPlaylist.getSelectionModel().getSelectedItem().getFilelink()));
@@ -156,4 +149,28 @@ public class MainController implements Initializable {
     }
 
 
+    public void addMovieToCategory(ActionEvent actionEvent) {
+        if (categoryTableView.getSelectionModel().getSelectedIndex() != -1 && moviesTabelView.getSelectionModel().getSelectedIndex() != -1) {
+            try {
+                categoryModel.addToCategory(categoryTableView.getSelectionModel().getSelectedItem(), categoryTableView.getSelectionModel().getFocusedIndex(), moviesTabelView.getSelectionModel().getSelectedItem());
+                refresh();
+            } catch (com.company.dal.dao.ExceotionDAO exceotionDAO) {
+                exceotionDAO.printStackTrace();
+            }
+        }
     }
+
+    public void deleteMovie(ActionEvent actionEvent) throws ExceotionDAO {
+        if (moviesTabelView.getSelectionModel().getSelectedIndex() != -1) {
+            try {
+                movieModel.deleteMovie(moviesTabelView.getSelectionModel().getSelectedItem());
+
+            } catch (com.company.dal.dao.ExceotionDAO exceotionDAO) {
+                exceotionDAO.printStackTrace();
+            }
+        }
+    }
+
+
+}
+

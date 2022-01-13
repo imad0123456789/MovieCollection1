@@ -14,11 +14,14 @@ public interface DALCatMov {
     public void addMovieToCat(Category category , Movie movie) throws ExceotionDAO;
 
 
+
     //remove Category
 
     public  void removeMovieFromCategory ( Movie movie)  throws ExceotionDAO;
 
+
     public void removeFromCategory (Category category , Movie movie)throws ExceotionDAO;
+
 
     public void removeFromCat (Category category) throws ExceotionDAO;
 

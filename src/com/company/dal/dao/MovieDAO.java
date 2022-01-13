@@ -92,7 +92,7 @@ public class MovieDAO  {
             String sql = "DELETE FROM Movie WHERE Id = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, movie.getId());
-
+            pst.executeUpdate();
         } catch (SQLServerException throwables) {
             throwables.printStackTrace();
         } catch (SQLException sqlException) {
