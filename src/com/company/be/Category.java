@@ -37,4 +37,9 @@ public class Category {
     public void addMovieToCategory(Movie movieToAdd) {
         this.allMoviesInCategory.add(movieToAdd);
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

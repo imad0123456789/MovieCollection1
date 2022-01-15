@@ -18,8 +18,8 @@ public class DalManager implements IDALManager{
 
     public DalManager() {
         databaseConnector = new MyDatabaseConnector();
-        this.movieDao = new MovieDAO(databaseConnector);
         this.catMovDAO = new CatMovDAO(databaseConnector);
+        this.movieDao = new MovieDAO(this.catMovDAO, databaseConnector);
         this.categoryDAO = new CategoryDAO(this.catMovDAO,databaseConnector);
     }
 

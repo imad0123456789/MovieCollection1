@@ -92,7 +92,7 @@ public class MainController implements Initializable {
         moviesTabelView.setItems(observableListMovie);
         movieNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         movieRatingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
-        movieUrlColumn.setCellValueFactory(new PropertyValueFactory<>("filelink"));
+        movieUrlColumn.setCellValueFactory(new PropertyValueFactory<>("categories"));
         movieLastviewColumn.setCellValueFactory(new PropertyValueFactory<>("lastview"));
 
 

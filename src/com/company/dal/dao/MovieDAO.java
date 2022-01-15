@@ -10,9 +10,11 @@ import java.util.List;
 
 public class MovieDAO  {
 
+    private final CatMovDAO catMovDAO;
     private MyDatabaseConnector databaseConnector;
 
-    public MovieDAO(MyDatabaseConnector databaseConnector) {
+    public MovieDAO(CatMovDAO catMovDAO, MyDatabaseConnector databaseConnector) {
+        this.catMovDAO = catMovDAO;
         this.databaseConnector = databaseConnector;
     }
 
@@ -34,6 +36,7 @@ public class MovieDAO  {
                 Date lastView = rs.getDate("lastView");
 
                 Movie movie = new Movie(id, name, rating, filelink, lastView);
+                movie.setCategories(this.catMovDAO.getCatInMovie(id));
                 movies.add(movie);
             }
 

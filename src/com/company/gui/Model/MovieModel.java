@@ -27,8 +27,8 @@ public class MovieModel {
 
 
 
-    public void addMovie (String name, String filelink  ) throws ExceotionDAO{
-        movieManger.addMovie(name, filelink);
+    public void addMovie (String name, String filelink, double imdbRate, double personalRate  ) throws ExceotionDAO{
+        movieManger.addMovie(name, filelink/*, imdbRate, personalRate*/);
         updatethelist();
 
     }

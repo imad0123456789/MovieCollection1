@@ -40,6 +40,12 @@ public class MovieController implements Initializable {
     @FXML
     private TextField txt_name;
 
+    @FXML
+    private TextField imdb_rate;
+
+    @FXML
+    private TextField personal_rate;
+
 
 
     private MovieModel movieModel = new MovieModel();
@@ -87,12 +93,16 @@ public class MovieController implements Initializable {
 
         String name = txt_name.getText();
         String filelink = txt_file_url.getText();
+        String imdbRateString = imdb_rate.getText();
+        String personalRateString = personal_rate.getText();
 
+        double personalRate = Double.parseDouble(personalRateString);
+        double imdbRate = Double.parseDouble(imdbRateString);
 
         List<Movie> listMov = movieModel.getMovies();
         System.out.println(listMov);
 
-        movieModel.addMovie(name, filelink);
+        movieModel.addMovie(name, filelink, personalRate, imdbRate);
         Stage stage = (Stage) Save.getScene().getWindow();
         stage.close();
     }

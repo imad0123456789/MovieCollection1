@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface DALCatMov {
 
-    public List<Movie> GetMovieInCat(int Id) throws ExceotionDAO;
+    public List<Movie> getMovieInCat(int Id) throws ExceotionDAO;
+
+    public List<Category> getCatInMovie(int Id) throws ExceotionDAO;
 
     public void addMovieToCat(Category category , Movie movie) throws ExceotionDAO;
 

@@ -37,7 +37,7 @@ public class CategoryDAO implements DALCategory {
                 String name = rs.getString("name");
 
                 Category category = new Category(id, name);
-                category.setAllMoviesInCategory(this.catMovDAO.GetMovieInCat(id));
+                category.setAllMoviesInCategory(this.catMovDAO.getMovieInCat(id));
                 categories.add(category);
             }
 
