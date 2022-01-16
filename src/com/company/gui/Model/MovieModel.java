@@ -28,7 +28,7 @@ public class MovieModel {
 
 
     public void addMovie (String name, String filelink, double imdbRate, double personalRate  ) throws ExceotionDAO{
-        movieManger.addMovie(name, filelink/*, imdbRate, personalRate*/);
+        movieManger.addMovie(name, filelink, imdbRate, personalRate);
         updatethelist();
 
     }
@@ -50,4 +50,6 @@ public class MovieModel {
     public void changeLastViewed(Movie movie) throws ExceotionDAO {
         movieManger.changeDate(movie);
     }
+
+
 }

@@ -48,6 +48,8 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<Movie, Double> movieRatingColumn;
     @FXML
+    private TableColumn<Movie, Double> movieImdbRatingColumn;
+    @FXML
     private TableColumn<Movie, String> movieUrlColumn;
     @FXML
     private TableView<Movie> moviesTabelView;
@@ -94,6 +96,7 @@ public class MainController implements Initializable {
         movieRatingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         movieUrlColumn.setCellValueFactory(new PropertyValueFactory<>("categories"));
         movieLastviewColumn.setCellValueFactory(new PropertyValueFactory<>("lastview"));
+        movieImdbRatingColumn.setCellValueFactory(new PropertyValueFactory<>("imdbRating"));
 
 
         categoryTableView.setItems(observableListCategory);
@@ -108,6 +111,14 @@ public class MainController implements Initializable {
 
     public void clickNewMovie(javafx.event.ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/com/company/gui/View/Movie.fxml"));
+        Scene scene = new Scene(root);
+
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void clickNewCategory(javafx.event.ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/com/company/gui/View/Category.fxml"));
         Scene scene = new Scene(root);
 
         Stage stage = new Stage();
@@ -168,6 +179,27 @@ public class MainController implements Initializable {
             } catch (com.company.dal.dao.ExceotionDAO exceotionDAO) {
                 exceotionDAO.printStackTrace();
             }
+        }
+    }
+    public void deleteCategory(ActionEvent actionEvent) throws ExceotionDAO {
+        if (categoryTableView.getSelectionModel().getSelectedIndex() != -1) {
+            try {
+                categoryModel.deleteCategory(categoryTableView.getSelectionModel().getSelectedItem());
+
+            } catch (com.company.dal.dao.ExceotionDAO exceotionDAO) {
+                exceotionDAO.printStackTrace();
+            }
+        }
+    }
+
+    public void clickEditMovie(javafx.event.ActionEvent actionEvent) throws IOException {
+        if (moviesTabelView.getSelectionModel().getSelectedIndex() != -1) {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/company/gui/View/editMovie.fxml"));
+            Scene scene = new Scene(root);
+
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
         }
     }
 

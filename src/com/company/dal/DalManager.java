@@ -30,7 +30,13 @@ public class DalManager implements IDALManager{
 
     @Override
     public void addMovie(String name, String filepath) throws ExceotionDAO {
-        movieDao.add(name,filepath);
+
+    }
+
+
+    @Override
+    public void addMovie(String name, String filepath, Double rating, Double imbdRating) throws ExceotionDAO {
+        movieDao.add(name,filepath, rating, imbdRating);
     }
 
     @Override

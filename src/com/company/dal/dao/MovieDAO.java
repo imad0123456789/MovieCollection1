@@ -34,8 +34,9 @@ public class MovieDAO  {
                 Double rating = rs.getDouble("rating");
                 String filelink = rs.getString("filelink");
                 Date lastView = rs.getDate("lastView");
+                Double imdbRating = rs.getDouble("imdbRating");
 
-                Movie movie = new Movie(id, name, rating, filelink, lastView);
+                Movie movie = new Movie(id, name, rating, imdbRating, filelink, lastView);
                 movie.setCategories(this.catMovDAO.getCatInMovie(id));
                 movies.add(movie);
             }
@@ -50,12 +51,14 @@ public class MovieDAO  {
     }
 
 
-    public void add(String name, String filepath) throws ExceotionDAO {
+    public void add(String name, String filepath, Double rating, Double imdbRating) throws ExceotionDAO {
         try (Connection con = databaseConnector.getConnection()) {
-            String sql = "INSERT INTO Movie (name , filelink ) VALUES (?, ?)";
+            String sql = "INSERT INTO Movie (name , filelink, rating, imdbRating ) VALUES (?, ?, ?, ?)";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, name);
             pst.setString(2, filepath);
+            pst.setDouble(3, rating);
+            pst.setDouble(4, imdbRating);
 
             pst.executeUpdate();
 
@@ -70,12 +73,14 @@ public class MovieDAO  {
 
     public void update(Movie movie) throws ExceotionDAO {
         try (Connection con = databaseConnector.getConnection()) {
-            String sql = "UPDATE Movie set name=?, rating=? , filelink=? , lastview=? WHERE Id = ? ";
+            String sql = "UPDATE Movie set name=?, rating=? , filelink=? , lastview=?, imdbRating=? WHERE Id = ? ";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, movie.getName());
             pst.setDouble(2, movie.getRating());
             pst.setString(3, movie.getFilelink());
             pst.setDate(4, (Date) movie.getLastview());
+            pst.setDouble(5, movie.getImdbRating());
+            pst.setInt(6, movie.getId());
 
             pst.executeUpdate();
 

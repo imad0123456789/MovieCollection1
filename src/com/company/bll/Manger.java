@@ -33,7 +33,12 @@ public class Manger implements LogicInterfaceManager {
 
     @Override
     public void addMovie(String name, String filepath) throws ExceotionDAO {
-        dalManager.addMovie(name,filepath);
+
+    }
+
+    @Override
+    public void addMovie(String name, String filepath, Double rating, Double imbdRating) throws ExceotionDAO {
+        dalManager.addMovie(name,filepath, rating, imbdRating);
     }
 
 

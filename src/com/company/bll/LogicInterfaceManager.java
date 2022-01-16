@@ -14,6 +14,8 @@ public interface LogicInterfaceManager {
 
     void addMovie (String name, String filepath) throws ExceotionDAO;
 
+    void addMovie(String name, String filepath, Double rating, Double imbdRating) throws ExceotionDAO;
+
     void updateMovie (Movie movie) throws ExceotionDAO;
 
     void deleteMovie (Movie movie) throws ExceotionDAO;

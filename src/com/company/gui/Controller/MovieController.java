@@ -87,6 +87,23 @@ public class MovieController implements Initializable {
             System.out.println("error"); // or something else
         }
     }
+    public void clickToEditMovie(ActionEvent actionEvent) throws ExceotionDAO {
+
+        String name = txt_name.getText();
+        String filelink = txt_file_url.getText();
+        String imdbRateString = imdb_rate.getText();
+        String personalRateString = personal_rate.getText();
+
+        double personalRate = Double.parseDouble(personalRateString);
+        double imdbRate = Double.parseDouble(imdbRateString);
+
+        List<Movie> listMov = movieModel.getMovies();
+        System.out.println(listMov);
+
+        //movieModel.updateMovie(name, filelink, personalRate, imdbRate);
+        Stage stage = (Stage) Save.getScene().getWindow();
+        stage.close();
+    }
 
 
     public void clickToAddMovie(ActionEvent actionEvent) throws ExceotionDAO {

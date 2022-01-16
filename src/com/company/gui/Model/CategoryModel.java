@@ -14,6 +14,7 @@ public class CategoryModel {
 
 
     private LogicInterfaceManager bllManager;
+    private Manger categoryManger;
 
     private final ObservableList<Category> categories;
 
@@ -33,8 +34,9 @@ public class CategoryModel {
         bllManager.addCategory(category);
     }
 
-    public void deleteCategory(int id) throws ExceotionDAO {
-        bllManager.deleteCategory(id);
+    public void deleteCategory(Category category) throws ExceotionDAO {
+        categoryManger.deleteCategory(category.getId());
+        updateTheList();
     }
 
     public void updateTheList() throws ExceotionDAO {

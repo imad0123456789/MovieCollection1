@@ -8,13 +8,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.gui.Controller.MainController">
+<AnchorPane prefHeight="900.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.gui.Controller.MainController">
    <children>
-      <TableView fx:id="moviesTabelView" layoutX="441.0" layoutY="142.0" prefHeight="413.0" prefWidth="339.0" style="-fx-background-radius: 10;">
+      <TableView fx:id="moviesTabelView" layoutX="441.0" layoutY="142.0" prefHeight="413.0" prefWidth="488.0" style="-fx-background-radius: 10;">
         <columns>
           <TableColumn fx:id="movieNameColumn" prefWidth="89.0" text="Name" />
+            <TableColumn fx:id="movieImdbRatingColumn" prefWidth="45.0" text="IMDb" />
           <TableColumn fx:id="movieRatingColumn" prefWidth="45.0" text="Rating" />
-            <TableColumn fx:id="movieUrlColumn" prefWidth="135.0" text="Categories" />
+            <TableColumn fx:id="movieUrlColumn" prefWidth="240.0" text="Categories" />
             <TableColumn fx:id="movieLastviewColumn" prefWidth="69.0" text="Lastview" />
         </columns>
       </TableView>
@@ -35,7 +36,9 @@
       <Button layoutX="389.0" layoutY="349.0" mnemonicParsing="false" onAction="#addMovieToCategory" prefHeight="25.0" prefWidth="51.0" text="⬅" />
       <Button fx:id="NewMovie" layoutX="468.0" layoutY="557.0" mnemonicParsing="false" onAction="#clickNewMovie" text="New" />
       <Button layoutX="522.0" layoutY="557.0" mnemonicParsing="false" onAction="#deleteMovie" text="Delete" />
-      <Button layoutX="587.0" layoutY="557.0" mnemonicParsing="false" onAction="#clickNewMovie" text="Update" />
+       <Button fx:id="NewCategory" layoutX="40.0" layoutY="557.0" mnemonicParsing="false" onAction="#clickNewCategory" text="New" />
+       <Button layoutX="89.0" layoutY="557.0" mnemonicParsing="false" onAction="#deleteCategory" text="Delete" />
+      <Button layoutX="587.0" layoutY="557.0" mnemonicParsing="false" onAction="#clickEditMovie" text="Update" />
       <Button fx:id="PlayBut" layoutX="96.0" layoutY="41.0" minWidth="35.0" mnemonicParsing="false" onAction="#playMovie" prefHeight="51.0" prefWidth="50.0" style="-fx-background-radius: 100;" text="▶">
          <font>
             <Font size="24.0" />
