@@ -124,4 +124,16 @@ public class Manger implements LogicInterfaceManager {
     public void removeFromCat(Category category) throws ExceotionDAO {
 
     }
+
+
+
+    @Override
+    public Movie updateMovieRating(Movie selectedItem, Double newRating) throws ExceotionDAO {
+        try {
+            return dalManager.updateMovieRating(selectedItem, newRating);
+        } catch (ExceotionDAO ex) {
+            throw new ExceotionDAO(ex.getMessage());
+        }
+
+    }
 }

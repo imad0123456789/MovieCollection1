@@ -53,4 +53,6 @@ public interface LogicInterfaceManager {
 
 
     public void removeFromCat (Category category) throws ExceotionDAO;
+
+    public Movie updateMovieRating(Movie selectedItem, Double newRating) throws ExceotionDAO;
 }
