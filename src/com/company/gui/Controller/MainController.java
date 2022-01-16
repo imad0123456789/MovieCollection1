@@ -55,6 +55,8 @@ public class MainController implements Initializable {
     private TableView<Movie> movieInPlaylist;
     @FXML
     private Button PlayBut;
+    @FXML
+    private Button removeMovieBut;
 
 
     private ObservableList<Movie> observableListMovie;
@@ -99,7 +101,7 @@ public class MainController implements Initializable {
         categoryTableView.setItems(observableListCategory);
         CategoryNames.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-        moviesInCategory.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        //moviesInCategory.setCellValueFactory(new PropertyValueFactory<>("Id"));
         CatMovieName.setCellValueFactory(new PropertyValueFactory<>("name"));
 
 
@@ -113,15 +115,21 @@ public class MainController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
+
     }
 
 
-    public void displayMovieInPlaylist(javafx.scene.input.MouseEvent event) {
+    public void displayMovieInPlaylist (javafx.scene.input.MouseEvent event) {
         movieInPlaylist.getItems().clear();
         for (Movie m : categoryTableView.getSelectionModel().getSelectedItem().getAllMoviesInCategory()) {
             movieInPlaylist.getItems().add(m);
+
         }
     }
+
+
+
+
 
     public void playMovie(ActionEvent actionEvent) {
         try {
@@ -129,6 +137,7 @@ public class MainController implements Initializable {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+
 
     }
 
@@ -139,11 +148,26 @@ public class MainController implements Initializable {
         }
     }
 
+    public  void refreshMovie(boolean isEditing){
+        moviesTabelView.getItems().clear();
+        try {
+            moviesTabelView.setItems(movieModel.getMovies());
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        if (isEditing){
+            movieInPlaylist.getItems().clear();
+            refresh();
+        }
+    }
+
+
     private void play() throws IOException, ExceotionDAO {
 
         //Desktop.getDesktop().open(new File(movieInPlaylist.getSelectionModel().getSelectedItem().getFilelink()));
-        Desktop.getDesktop().open(new File(moviesTabelView.getSelectionModel().getSelectedItem().getFilelink()));
-        movieModel.changeLastViewed(moviesTabelView.getSelectionModel().getSelectedItem());
+        Desktop.getDesktop().open(new File(movieInPlaylist.getSelectionModel().getSelectedItem().getFilelink()));
+        movieModel.changeLastViewed(movieInPlaylist.getSelectionModel().getSelectedItem());
+
 
         //movieModel.updateMovie(movieInPlaylist.getSelectionModel().getSelectedItem(), movieInPlaylist.getSelectionModel().getSelectedIndex());
     }
@@ -167,10 +191,22 @@ public class MainController implements Initializable {
 
             } catch (com.company.dal.dao.ExceotionDAO exceotionDAO) {
                 exceotionDAO.printStackTrace();
+                refreshMovie(false);
             }
         }
     }
 
 
+    public void removeMovie(ActionEvent actionEvent) {
+        if (movieInPlaylist.getSelectionModel().getSelectedIndex() != -1 && categoryTableView.getSelectionModel().getSelectedIndex() !=-1 ){
+            try{
+                //System.out.println(movieInPlaylist.getSelectionModel().getSelectedItem().getId());
+                categoryModel.removeMovieFromCategory(categoryTableView.getSelectionModel().getSelectedItem(), categoryTableView.getSelectionModel().getFocusedIndex() , movieInPlaylist.getSelectionModel().getSelectedItem() , movieInPlaylist.getSelectionModel().getSelectedIndex());
+                refresh();
+            } catch (ExceotionDAO exceotionDAO) {
+                exceotionDAO.printStackTrace();
+            }
+        }
+    }
 }
 

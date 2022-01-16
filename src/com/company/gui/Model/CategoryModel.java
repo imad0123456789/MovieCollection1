@@ -51,6 +51,18 @@ public class CategoryModel {
         }
     }
 
+    public void removeMovieFromCategory (Category selectedItem, int selectedIndex, Movie selectedMovie , int movieIndex) throws ExceotionDAO {
+        try{
+            bllManager.removeFromCategory(selectedItem,selectedMovie);
+            List<Movie> newList = selectedItem.getAllMoviesInCategory();
+            newList.remove(movieIndex);
+            selectedItem.setAllMoviesInCategory(newList);
+            categories.set(selectedIndex, selectedItem);
+        } catch (ExceotionDAO exceotionDAO) {
+            exceotionDAO.printStackTrace();
+        }
+    }
+
 
 
 

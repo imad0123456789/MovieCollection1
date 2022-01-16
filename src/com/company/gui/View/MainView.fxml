@@ -25,8 +25,8 @@
       </TableView>
       <TableView fx:id="movieInPlaylist" layoutX="160.0" layoutY="142.0" prefHeight="413.0" prefWidth="228.0" style="-fx-background-radius: 10;">
         <columns>
-          <TableColumn fx:id="moviesInCategory" prefWidth="55.0" text="#" />
-          <TableColumn fx:id="CatMovieName" prefWidth="215.0" text="Movie Title" />
+          <TableColumn fx:id="moviesInCategory" minWidth="0.0" prefWidth="0.0" text="#" />
+          <TableColumn fx:id="CatMovieName" prefWidth="270.0" text="Movie Title" />
         </columns>
       </TableView>
       <Button layoutX="728.0" layoutY="62.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" style="-fx-background-radius: 100;" text="🔎" />
@@ -41,5 +41,6 @@
             <Font size="24.0" />
          </font>
       </Button>
+      <Button fx:id="removeMovieBut" layoutX="202.0" layoutY="557.0" mnemonicParsing="false" onAction="#removeMovie" prefHeight="25.0" prefWidth="101.0" text="Remove Movie" />
    </children>
 </AnchorPane>

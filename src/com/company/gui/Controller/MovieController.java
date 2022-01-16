@@ -49,6 +49,7 @@ public class MovieController implements Initializable {
 
 
     private MovieModel movieModel = new MovieModel();
+    private MainController mainController = new MainController();
     private final ObservableList<Movie> contactList = FXCollections.observableArrayList();
     private Object Date;
 
@@ -105,5 +106,6 @@ public class MovieController implements Initializable {
         movieModel.addMovie(name, filelink, personalRate, imdbRate);
         Stage stage = (Stage) Save.getScene().getWindow();
         stage.close();
+
     }
 }

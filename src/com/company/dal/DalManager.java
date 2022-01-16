@@ -97,4 +97,9 @@ public class DalManager implements IDALManager{
     public void removeFromCat(Category category) throws ExceotionDAO {
 
     }
+
+    @Override
+    public Movie updateMovieRating(Movie selectedItem, Double newRating) throws ExceotionDAO {
+        return movieDao.updateMovieRating(selectedItem, newRating);
+    }
 }

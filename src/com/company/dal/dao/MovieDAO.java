@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieDAO  {
+public class MovieDAO {
 
     private final CatMovDAO catMovDAO;
     private MyDatabaseConnector databaseConnector;
@@ -19,7 +19,6 @@ public class MovieDAO  {
     }
 
     private Connection con;
-
 
 
     public List<Movie> getAllMovies() throws ExceotionDAO {
@@ -122,7 +121,6 @@ public class MovieDAO  {
             movie.setLastview(date);
 
 
-
         } catch (SQLServerException throwables) {
             throwables.printStackTrace();
         } catch (SQLException sqlException) {
@@ -130,4 +128,27 @@ public class MovieDAO  {
         }
         return movie;
     }
+
+
+    public Movie updateMovieRating(Movie selectedItem, Double newRating) {
+        try (Connection con = databaseConnector.getConnection()) {
+            String sql = "UPDATE Movie set rating=? WHERE Id = ? ";
+
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setDouble(1, newRating);
+            pst.setInt(2, selectedItem.getId());
+            pst.executeUpdate();
+            //Movie mov = new Movie(selectedItem.getId(), selectedItem.getName(), newRating, selectedItem.getImdbRating(), selectedItem.getLastview(), selectedItem.getFilelink());
+            //return mov;
+
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
+        return selectedItem;
+    }
 }
+
+

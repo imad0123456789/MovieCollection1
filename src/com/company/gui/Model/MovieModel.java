@@ -50,4 +50,15 @@ public class MovieModel {
     public void changeLastViewed(Movie movie) throws ExceotionDAO {
         movieManger.changeDate(movie);
     }
+
+    public void updateMovieRating(Movie selectedItem, int movieIndex, Double newRating) throws ExceotionDAO {
+        Movie updatedMovie;
+        try{
+            updatedMovie = movieManger.updateMovieRating(selectedItem, newRating);
+            movies.set(movieIndex,updatedMovie);
+        } catch (ExceotionDAO exceotionDAO) {
+            exceotionDAO.printStackTrace();
+        }
+    }
 }
+
