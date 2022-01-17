@@ -31,10 +31,7 @@ public class Manger implements LogicInterfaceManager {
         return dalManager.getAllMovies();
     }
 
-    @Override
-    public void addMovie(String name, String filepath) throws ExceotionDAO {
 
-    }
 
     @Override
     public void addMovie(String name, String filepath, Double rating, Double imbdRating) throws ExceotionDAO {
@@ -51,7 +48,6 @@ public class Manger implements LogicInterfaceManager {
     public void deleteMovie(Movie movie) throws ExceotionDAO {
         dalManager.deleteMovie(movie);
     }
-
 
     @Override
     public Movie changeRate(Movie movie, Double newRate) throws ExceotionDAO {
@@ -80,8 +76,8 @@ public class Manger implements LogicInterfaceManager {
 
 
     @Override
-    public void addCategory(Category category) throws ExceotionDAO {
-        dalManager.addCategory(category);
+    public void addCategory(String name) throws ExceotionDAO {
+        dalManager.addCategory(name);
     }
 
     @Override
@@ -90,12 +86,9 @@ public class Manger implements LogicInterfaceManager {
     }
 
     @Override
-    public void deleteCategory(int categoryId)  {
-    try {
-        dalManager.deleteCategory(categoryId);
-    } catch (ExceotionDAO exceotionDAO) {
-        exceotionDAO.printStackTrace();
-    }
+    public void deleteCategory(Category category) throws ExceotionDAO {
+        dalManager.deleteCategory(category);
+
     }
 
 

@@ -12,7 +12,6 @@ public interface LogicInterfaceManager {
     //Movie
     List<Movie> getAllMovies() throws ExceotionDAO;
 
-    void addMovie (String name, String filepath) throws ExceotionDAO;
 
     void addMovie(String name, String filepath, Double rating, Double imbdRating) throws ExceotionDAO;
 
@@ -34,11 +33,11 @@ public interface LogicInterfaceManager {
     List<Category> getAllCategory() throws ExceotionDAO;
 
 
-    void addCategory (Category category ) throws ExceotionDAO;
+    void addCategory (String name ) throws ExceotionDAO;
 
     void updateCategory (Category category) throws ExceotionDAO;
 
-    void deleteCategory (int categoryId) throws ExceotionDAO;
+    void deleteCategory (Category category) throws ExceotionDAO;
 
 
     public List<Movie> GetMovieInCat(int Id) throws ExceotionDAO;

@@ -5,6 +5,8 @@ import com.company.be.Movie;
 import com.company.dal.dao.ExceotionDAO;
 import com.company.gui.Model.CategoryModel;
 import com.company.gui.Model.MovieModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,7 +25,9 @@ public class CategoryController implements Initializable {
     private Button Save;
 
 
-    private CategoryModel categoryModel = new CategoryModel();
+    private CategoryModel categoryModel =  CategoryModel.getInstance();
+    private final ObservableList<Category> contactList = FXCollections.observableArrayList();
+    MainController mainController;
 
     public CategoryController() throws ExceotionDAO {
     }
@@ -32,14 +36,30 @@ public class CategoryController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+
+    private void getAllEntries () throws ExceotionDAO {
+        contactList.setAll(categoryModel.getCategories());
+    }
+
+
     public void clickToAddCategory(ActionEvent actionEvent) throws ExceotionDAO {
 
         String name = txt_name.getText();
 
 
+        List<Category> listCat = categoryModel.getCategories();
+        System.out.println(listCat);
 
-        //categoryModel.addCategory(name);
+
+        categoryModel.addCategory(name);
+        mainController.refreshCategory(false);
         Stage stage = (Stage) Save.getScene().getWindow();
         stage.close();
     }
+
+    public void setController(MainController mainController) {
+        this.mainController = mainController;
+    }
 }
+
+

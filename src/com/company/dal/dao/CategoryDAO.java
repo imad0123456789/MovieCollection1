@@ -52,11 +52,11 @@ public class CategoryDAO implements DALCategory {
 
 
     @Override
-    public void add(Category category) throws ExceotionDAO {
+    public void add(String name) throws ExceotionDAO {
         try (Connection con = databaseConnector.getConnection()) {
             String sql = "INSERT INTO Category (name) VALUES (?)";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, category.getName());
+            pst.setString(1, name);
 
             pst.executeUpdate();
 
@@ -72,7 +72,7 @@ public class CategoryDAO implements DALCategory {
     @Override
     public void update(Category category) throws ExceotionDAO {
         try (Connection con = databaseConnector.getConnection()) {
-            String sql = "UPDATE Category set name=? WHERE Id = ? ";
+            String sql = "UPDATE Category set name=? WHERE Id = (?) ";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, category.getName());
             pst.executeUpdate();
@@ -86,12 +86,14 @@ public class CategoryDAO implements DALCategory {
     }
 
 
+
     @Override
-    public void delete(int categoryId) throws ExceotionDAO {
+    public void delete(Category category) throws ExceotionDAO {
         try (Connection con = databaseConnector.getConnection()) {
-            String sql = "DELET FROM Category WHERE Id = ?";
+            String sql = "DELETE FROM Category WHERE Id = (?)";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, categoryId);
+            pst.setInt(1, category.getId());
+            pst.executeUpdate();
 
         } catch (SQLServerException throwables) {
             throwables.printStackTrace();

@@ -11,8 +11,24 @@ import javafx.collections.ObservableList;
 public class MovieModel {
 
     private Manger movieManger;
-    private final ObservableList<Movie> movies;
+    private ObservableList<Movie> movies;
 
+    private static MovieModel single_instance = null;
+
+    // Static method
+    // Static method to create instance of Singleton class
+    public static MovieModel getInstance()
+    {
+        if (single_instance == null) {
+            try {
+                single_instance = new MovieModel();
+            } catch (ExceotionDAO e) {
+                e.printStackTrace();
+            }
+        }
+
+        return single_instance;
+    }
 
     public MovieModel() throws ExceotionDAO {
         movieManger = new Manger();
@@ -22,13 +38,14 @@ public class MovieModel {
 
 
     public ObservableList<Movie> getMovies(){
+        // System.out.println(movies);
         return movies;
     }
 
 
 
     public void addMovie (String name, String filelink, double imdbRate, double personalRate  ) throws ExceotionDAO{
-        movieManger.addMovie(name, filelink/*, imdbRate, personalRate*/);
+        movieManger.addMovie(name, filelink, imdbRate, personalRate);
         updatethelist();
 
     }
@@ -44,7 +61,10 @@ public class MovieModel {
     }
 
     private void updatethelist() throws ExceotionDAO{
-        movies.setAll(movieManger.getAllMovies());
+        System.out.println(movieManger.getAllMovies());
+        movies = FXCollections.observableArrayList();
+        movies.addAll(movieManger.getAllMovies());
+        System.out.println(movies);
     }
 
     public void changeLastViewed(Movie movie) throws ExceotionDAO {

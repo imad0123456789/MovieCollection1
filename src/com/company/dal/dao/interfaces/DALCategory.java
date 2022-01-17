@@ -13,11 +13,13 @@ public interface DALCategory {
     List<Category> getAllCategory() throws ExceotionDAO;
 
 
-    void add (Category category ) throws ExceotionDAO;
+    //void add (Category category ) throws ExceotionDAO;
+
+    void add(String name) throws ExceotionDAO;
 
     void update (Category category) throws ExceotionDAO;
 
-    void delete (int categoryId) throws ExceotionDAO;
+    void delete (Category category) throws ExceotionDAO;
 
     public void addToCategory(Category selectedItem, Movie selectedMovie) throws ExceotionDAO;
 

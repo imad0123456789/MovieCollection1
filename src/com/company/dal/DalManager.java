@@ -65,8 +65,8 @@ public class DalManager implements IDALManager{
     }
 
     @Override
-    public void addCategory(Category category) throws ExceotionDAO {
-
+    public void addCategory(String name) throws ExceotionDAO {
+        categoryDAO.add(name);
     }
 
     @Override
@@ -75,7 +75,8 @@ public class DalManager implements IDALManager{
     }
 
     @Override
-    public void deleteCategory(int categoryId) throws ExceotionDAO {
+    public void deleteCategory(Category category) throws ExceotionDAO {
+        categoryDAO.delete(category);
 
     }
 

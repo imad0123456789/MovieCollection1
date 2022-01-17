@@ -20,7 +20,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -64,9 +63,9 @@ public class MainController implements Initializable {
     private ObservableList<Movie> observableListMovie;
     private ObservableList<Category> observableListCategory;
 
-    private MovieModel movieModel = new MovieModel();
+    private MovieModel movieModel = MovieModel.getInstance();
 
-    private CategoryModel categoryModel = new CategoryModel();
+    private CategoryModel categoryModel = CategoryModel.getInstance();
 
 
     public MainController() throws ExceotionDAO {
@@ -112,7 +111,10 @@ public class MainController implements Initializable {
 
 
     public void clickNewMovie(javafx.event.ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/company/gui/View/Movie.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/company/gui/View/Movie.fxml"));
+        Parent root = (Parent) loader.load();
+        loader.<MovieController>getController().setController(this);
+
         Scene scene = new Scene(root);
 
         Stage stage = new Stage();
@@ -121,7 +123,10 @@ public class MainController implements Initializable {
 
     }
     public void clickNewCategory(javafx.event.ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/company/gui/View/Category.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/company/gui/View/Category.fxml"));
+        Parent root = (Parent) loader.load();
+        loader.<CategoryController>getController().setController(this);
+
         Scene scene = new Scene(root);
 
         Stage stage = new Stage();
@@ -162,6 +167,7 @@ public class MainController implements Initializable {
     public  void refreshMovie(boolean isEditing){
         moviesTabelView.getItems().clear();
         try {
+            System.out.println(movieModel.getMovies());
             moviesTabelView.setItems(movieModel.getMovies());
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -172,8 +178,29 @@ public class MainController implements Initializable {
         }
     }
 
+    /*
+    public  void refreshCategory(boolean isEditing){
+        categoryTableView.getItems().clear();
+        try{
+            categoryTableView.setItems(categoryModel.getCategories());
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
 
-    private void play() throws IOException, ExceotionDAO {
+    }
+*/
+    public  void refreshCategory(boolean isEditing) {
+        try {
+            observableListCategory = categoryModel.getCurrentCategories();
+            categoryTableView.setItems(observableListCategory);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+
+        private void play() throws IOException, ExceotionDAO {
 
         //Desktop.getDesktop().open(new File(movieInPlaylist.getSelectionModel().getSelectedItem().getFilelink()));
         Desktop.getDesktop().open(new File(movieInPlaylist.getSelectionModel().getSelectedItem().getFilelink()));
@@ -199,10 +226,10 @@ public class MainController implements Initializable {
         if (moviesTabelView.getSelectionModel().getSelectedIndex() != -1) {
             try {
                 movieModel.deleteMovie(moviesTabelView.getSelectionModel().getSelectedItem());
-
+                refreshMovie(false);
             } catch (com.company.dal.dao.ExceotionDAO exceotionDAO) {
                 exceotionDAO.printStackTrace();
-                refreshMovie(false);
+
             }
         }
     }
@@ -213,6 +240,7 @@ public class MainController implements Initializable {
 
             } catch (com.company.dal.dao.ExceotionDAO exceotionDAO) {
                 exceotionDAO.printStackTrace();
+                refreshCategory(false);
             }
         }
     }

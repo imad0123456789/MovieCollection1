@@ -26,30 +26,23 @@ import java.util.ResourceBundle;
 public class MovieController implements Initializable {
     @FXML
     private Button ClikeChoose;
-
     @FXML
     private Button Save;
-
     @FXML
     private AnchorPane addMovie;
-
-
     @FXML
     private TextField txt_file_url;
-
     @FXML
     private TextField txt_name;
-
     @FXML
     private TextField imdb_rate;
-
     @FXML
     private TextField personal_rate;
 
 
 
-    private MovieModel movieModel = new MovieModel();
-    private MainController mainController = new MainController();
+    private MovieModel movieModel = MovieModel.getInstance();
+    private MainController mainController ;
     private final ObservableList<Movie> contactList = FXCollections.observableArrayList();
     private Object Date;
 
@@ -66,10 +59,6 @@ public class MovieController implements Initializable {
     private void getAllEntries() throws SQLException, ExceotionDAO {
         contactList.setAll(movieModel.getMovies());
     }
-
-
-    
-
 
     public void ChooseLocation(javafx.event.ActionEvent actionEvent) throws IOException {
         FileChooser fileChooser = new FileChooser();
@@ -88,6 +77,7 @@ public class MovieController implements Initializable {
             System.out.println("error"); // or something else
         }
     }
+
     public void clickToEditMovie(ActionEvent actionEvent) throws ExceotionDAO {
 
         String name = txt_name.getText();
@@ -121,8 +111,13 @@ public class MovieController implements Initializable {
         System.out.println(listMov);
 
         movieModel.addMovie(name, filelink, personalRate, imdbRate);
+        this.mainController.refreshMovie(false);
         Stage stage = (Stage) Save.getScene().getWindow();
         stage.close();
 
+    }
+
+    public void setController(MainController mainController) {
+        this.mainController = mainController;
     }
 }

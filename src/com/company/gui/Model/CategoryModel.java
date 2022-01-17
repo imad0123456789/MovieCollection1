@@ -18,7 +18,22 @@ public class CategoryModel {
 
     private final ObservableList<Category> categories;
 
+    private static CategoryModel single_instance = null;
 
+    // Static method
+    // Static method to create instance of Singleton class
+    public static CategoryModel getInstance()
+    {
+        if (single_instance == null) {
+            try {
+                single_instance = new CategoryModel();
+            } catch (ExceotionDAO e) {
+                e.printStackTrace();
+            }
+        }
+
+        return single_instance;
+    }
     public CategoryModel() throws ExceotionDAO {
         this.bllManager = new Manger();
 
@@ -30,12 +45,14 @@ public class CategoryModel {
         return categories;
     }
 
-    public void addCategory(Category category) throws ExceotionDAO {
-        bllManager.addCategory(category);
+
+    public void addCategory(String name) throws ExceotionDAO {
+        bllManager.addCategory(name);
+        updateTheList();
     }
 
     public void deleteCategory(Category category) throws ExceotionDAO {
-        categoryManger.deleteCategory(category.getId());
+        bllManager.deleteCategory(category);
         updateTheList();
     }
 
@@ -66,6 +83,7 @@ public class CategoryModel {
     }
 
 
-
-
+    public ObservableList<Category> getCurrentCategories() throws ExceotionDAO {
+        return categories;
+    }
 }
