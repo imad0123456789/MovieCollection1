@@ -61,21 +61,19 @@ public class MovieModel {
     }
 
     private void updatethelist() throws ExceotionDAO{
-        System.out.println(movieManger.getAllMovies());
         movies = FXCollections.observableArrayList();
         movies.addAll(movieManger.getAllMovies());
-        System.out.println(movies);
     }
 
     public void changeLastViewed(Movie movie) throws ExceotionDAO {
         movieManger.changeDate(movie);
+        updatethelist();
     }
 
-    public void updateMovieRating(Movie selectedItem, int movieIndex, Double newRating) throws ExceotionDAO {
-        Movie updatedMovie;
+    public void updateMovieRating(Movie selectedItem, Double newRating) throws ExceotionDAO {
         try{
-            updatedMovie = movieManger.updateMovieRating(selectedItem, newRating);
-            movies.set(movieIndex,updatedMovie);
+            movieManger.updateMovieRating(selectedItem, newRating);
+            updatethelist();
         } catch (ExceotionDAO exceotionDAO) {
             exceotionDAO.printStackTrace();
         }

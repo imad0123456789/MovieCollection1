@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.gui.Controller.MainController">
+<AnchorPane prefHeight="653.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.gui.Controller.MainController">
    <children>
       <TableView fx:id="moviesTabelView" layoutX="441.0" layoutY="142.0" prefHeight="413.0" prefWidth="488.0" style="-fx-background-radius: 10;">
         <columns>
@@ -39,11 +40,13 @@
        <Button fx:id="NewCategory" layoutX="40.0" layoutY="557.0" mnemonicParsing="false" onAction="#clickNewCategory" text="New" />
        <Button layoutX="89.0" layoutY="557.0" mnemonicParsing="false" onAction="#deleteCategory" text="Delete" />
       <Button layoutX="587.0" layoutY="557.0" mnemonicParsing="false" onAction="#clickEditMovie" text="Update" />
-      <Button fx:id="PlayBut" layoutX="96.0" layoutY="41.0" minWidth="35.0" mnemonicParsing="false" onAction="#playMovie" prefHeight="51.0" prefWidth="50.0" style="-fx-background-radius: 100;" text="▶">
+      <Button fx:id="PlayBut" layoutX="89.0" layoutY="25.0" minWidth="35.0" mnemonicParsing="false" onAction="#playMovie" prefHeight="82.0" prefWidth="82.0" style="-fx-background-radius: 100;" text="▶">
          <font>
-            <Font size="24.0" />
+            <Font size="36.0" />
          </font>
       </Button>
       <Button fx:id="removeMovieBut" layoutX="202.0" layoutY="557.0" mnemonicParsing="false" onAction="#removeMovie" prefHeight="25.0" prefWidth="101.0" text="Remove Movie" />
+      <Button fx:id="rateMovie" layoutX="242.0" layoutY="50.0" mnemonicParsing="false" onAction="#rateMovie" prefHeight="25.0" prefWidth="101.0" text="Rate Movie" />
+      <ComboBox fx:id="choices" layoutX="351.0" layoutY="50.0" prefHeight="25.0" prefWidth="67.0" />
    </children>
 </AnchorPane>
