@@ -216,10 +216,12 @@ public class MainController implements Initializable {
             try {
                 categoryModel.addToCategory(categoryTableView.getSelectionModel().getSelectedItem(), categoryTableView.getSelectionModel().getFocusedIndex(), moviesTabelView.getSelectionModel().getSelectedItem());
                 refresh();
+
             } catch (com.company.dal.dao.ExceotionDAO exceotionDAO) {
                 exceotionDAO.printStackTrace();
             }
         }
+        //refreshMovie(false);
     }
 
     public void deleteMovie(ActionEvent actionEvent) throws ExceotionDAO {

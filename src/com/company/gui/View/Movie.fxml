@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<?import com.sun.javafx.scene.control.DoubleField?>
 <AnchorPane fx:id="addMovie" prefHeight="300.0" prefWidth="512.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.gui.Controller.MovieController">
    <children>
       <TextField fx:id="txt_name" layoutX="74.0" layoutY="54.0" prefHeight="25.0" prefWidth="345.0" promptText="the name of the Movie" />
       <TextField fx:id="txt_file_url" layoutX="74.0" layoutY="96.0" prefHeight="25.0" prefWidth="345.0" promptText="select file " />
-      <TextField fx:id="imdb_rate" layoutX="150.0" layoutY="141.0" prefHeight="25.0" prefWidth="40.0" />
-      <TextField fx:id="personal_rate" layoutX="150.0" layoutY="186.0" prefHeight="25.0" prefWidth="40.0" />
 
       <Label layoutX="32.0" layoutY="56.0" text="Title: ">
          <font>
@@ -41,5 +39,7 @@
          </font>
       </Label>
       <Button fx:id="Save" layoutX="185.0" layoutY="231.0" mnemonicParsing="false" onAction="#clickToAddMovie" prefHeight="25.0" prefWidth="62.0" text="Add" />
+      <ComboBox fx:id="imdb_rate" layoutX="136.0" layoutY="139.0" prefHeight="26.0" prefWidth="75.0" />
+      <ComboBox fx:id="personal_rate" layoutX="136.0" layoutY="184.0" prefHeight="26.0" prefWidth="75.0" />
    </children>
 </AnchorPane>

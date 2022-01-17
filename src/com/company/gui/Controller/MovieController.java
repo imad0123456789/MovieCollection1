@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -35,9 +36,9 @@ public class MovieController implements Initializable {
     @FXML
     private TextField txt_name;
     @FXML
-    private TextField imdb_rate;
+    private ComboBox<String> imdb_rate;
     @FXML
-    private TextField personal_rate;
+    private ComboBox<String> personal_rate;
 
 
 
@@ -52,6 +53,9 @@ public class MovieController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        imdb_rate.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5"));
+        personal_rate.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5"));
 
     }
 
@@ -78,31 +82,17 @@ public class MovieController implements Initializable {
         }
     }
 
-    public void clickToEditMovie(ActionEvent actionEvent) throws ExceotionDAO {
 
-        String name = txt_name.getText();
-        String filelink = txt_file_url.getText();
-        String imdbRateString = imdb_rate.getText();
-        String personalRateString = personal_rate.getText();
 
-        double personalRate = Double.parseDouble(personalRateString);
-        double imdbRate = Double.parseDouble(imdbRateString);
 
-        List<Movie> listMov = movieModel.getMovies();
-        System.out.println(listMov);
-
-        //movieModel.updateMovie(name, filelink, personalRate, imdbRate);
-        Stage stage = (Stage) Save.getScene().getWindow();
-        stage.close();
-    }
 
 
     public void clickToAddMovie(ActionEvent actionEvent) throws ExceotionDAO {
 
         String name = txt_name.getText();
         String filelink = txt_file_url.getText();
-        String imdbRateString = imdb_rate.getText();
-        String personalRateString = personal_rate.getText();
+        String imdbRateString = imdb_rate.getSelectionModel().getSelectedItem();
+        String personalRateString = personal_rate.getSelectionModel().getSelectedItem();
 
         double personalRate = Double.parseDouble(personalRateString);
         double imdbRate = Double.parseDouble(imdbRateString);
@@ -117,7 +107,28 @@ public class MovieController implements Initializable {
 
     }
 
+    public void clickToEditMovie(ActionEvent actionEvent) throws ExceotionDAO {
+
+        String name = txt_name.getText();
+        String filelink = txt_file_url.getText();
+        String imdbRateString = imdb_rate.getSelectionModel().getSelectedItem();
+        String personalRateString = personal_rate.getSelectionModel().getSelectedItem();
+
+        double personalRate = Double.parseDouble(personalRateString);
+        double imdbRate = Double.parseDouble(imdbRateString);
+
+        List<Movie> listMov = movieModel.getMovies();
+        System.out.println(listMov);
+
+        //movieModel.updateMovie(name, filelink, personalRate, imdbRate);
+        Stage stage = (Stage) Save.getScene().getWindow();
+        stage.close();
+    }
+
+
     public void setController(MainController mainController) {
         this.mainController = mainController;
     }
+
+
 }
