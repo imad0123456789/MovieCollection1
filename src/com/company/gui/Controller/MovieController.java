@@ -41,7 +41,7 @@ public class MovieController implements Initializable {
     private ComboBox<String> personal_rate;
 
 
-
+    private Movie currentMovie;
     private MovieModel movieModel = MovieModel.getInstance();
     private MainController mainController ;
     private final ObservableList<Movie> contactList = FXCollections.observableArrayList();
@@ -54,8 +54,8 @@ public class MovieController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        imdb_rate.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5"));
-        personal_rate.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5"));
+        imdb_rate.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
+        personal_rate.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
 
     }
 
@@ -83,9 +83,16 @@ public class MovieController implements Initializable {
     }
 
 
+    public Movie getCurrentMovie() {
+        return currentMovie;
+    }
 
+    public void setCurrentMovie(Movie currentMovie) {
+        this.currentMovie = currentMovie;
+        txt_name.setText(currentMovie.getName());
+        txt_file_url.setText(currentMovie.getFilelink());
 
-
+    }
 
     public void clickToAddMovie(ActionEvent actionEvent) throws ExceotionDAO {
 
@@ -109,18 +116,20 @@ public class MovieController implements Initializable {
 
     public void clickToEditMovie(ActionEvent actionEvent) throws ExceotionDAO {
 
-        String name = txt_name.getText();
-        String filelink = txt_file_url.getText();
+        currentMovie.setName(txt_name.getText());
+        currentMovie.setFilelink(txt_file_url.getText());
         String imdbRateString = imdb_rate.getSelectionModel().getSelectedItem();
         String personalRateString = personal_rate.getSelectionModel().getSelectedItem();
 
-        double personalRate = Double.parseDouble(personalRateString);
-        double imdbRate = Double.parseDouble(imdbRateString);
+        currentMovie.setRating(Double.parseDouble(personalRateString));
+        currentMovie.setImdbRating(Double.parseDouble(imdbRateString));
+
+
 
         List<Movie> listMov = movieModel.getMovies();
         System.out.println(listMov);
 
-        //movieModel.updateMovie(name, filelink, personalRate, imdbRate);
+        movieModel.updateMovie(currentMovie);
         Stage stage = (Stage) Save.getScene().getWindow();
         stage.close();
     }

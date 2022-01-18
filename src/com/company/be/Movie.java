@@ -8,8 +8,8 @@ public class Movie {
 
     private int Id;
     private String name;
-    private double rating;
-    private double imdbRating;
+    private Double rating;
+    private Double imdbRating;
     private String filelink;
     private Date lastview;
     private List<Category> categories = new ArrayList<>();

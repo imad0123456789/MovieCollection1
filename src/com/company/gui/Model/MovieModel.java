@@ -50,7 +50,7 @@ public class MovieModel {
 
     }
 
-    public void updateMovie(Movie movie, int selectedIndex) throws ExceotionDAO{
+    public void updateMovie(Movie movie/*, int selectedIndex*/) throws ExceotionDAO{
         movieManger.updateMovie(movie);
         updatethelist();
     }
@@ -78,5 +78,7 @@ public class MovieModel {
             exceotionDAO.printStackTrace();
         }
     }
+
+
 }
 

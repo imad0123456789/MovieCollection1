@@ -83,7 +83,7 @@ public class MainController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
 
-        choices.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5"));
+        choices.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
         //categoryModel = CategoryModel.getInstance();
         //movieModel = MovieModel.getInstance();
 
@@ -259,9 +259,11 @@ public class MainController implements Initializable {
 
     public void clickEditMovie(javafx.event.ActionEvent actionEvent) throws IOException {
         if (moviesTabelView.getSelectionModel().getSelectedIndex() != -1) {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/company/gui/View/editMovie.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/company/gui/View/editMovie.fxml"));
+            Parent root = loader.load();
             Scene scene = new Scene(root);
-
+            MovieController mc = loader.getController();
+            mc.setCurrentMovie(moviesTabelView.getSelectionModel().getSelectedItem());
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
