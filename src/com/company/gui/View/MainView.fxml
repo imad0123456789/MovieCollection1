@@ -46,7 +46,7 @@
          </font>
       </Button>
       <Button fx:id="removeMovieBut" layoutX="202.0" layoutY="557.0" mnemonicParsing="false" onAction="#removeMovie" prefHeight="25.0" prefWidth="101.0" text="Remove Movie" />
-      <Button fx:id="rateMovie" layoutX="242.0" layoutY="50.0" mnemonicParsing="false" onAction="#rateMovie" prefHeight="25.0" prefWidth="101.0" text="Rate Movie" />
-      <ComboBox fx:id="choices" layoutX="351.0" layoutY="50.0" prefHeight="25.0" prefWidth="67.0" />
+      <Button fx:id="rateMovie" layoutX="630.0" layoutY="105.0" mnemonicParsing="false" onAction="#rateMovie" prefHeight="25.0" prefWidth="90.0" text="Filter by rate" />
+      <ComboBox fx:id="choices" layoutX="728.0" layoutY="105.0" prefHeight="25.0" prefWidth="55.0" />
    </children>
 </AnchorPane>
