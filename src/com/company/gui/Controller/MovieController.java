@@ -54,8 +54,8 @@ public class MovieController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        imdb_rate.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
-        personal_rate.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
+        imdb_rate.setItems(FXCollections.observableArrayList("0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
+        personal_rate.setItems(FXCollections.observableArrayList("0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
 
     }
 
