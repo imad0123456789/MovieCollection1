@@ -130,6 +130,7 @@ public class MovieController implements Initializable {
         System.out.println(listMov);
 
         movieModel.updateMovie(currentMovie);
+        //this.mainController.refreshMovie(false);
         Stage stage = (Stage) Save.getScene().getWindow();
         stage.close();
     }

@@ -29,6 +29,11 @@ public class DalManager implements IDALManager{
     }
 
     @Override
+    public List<Movie> getRateMovies() throws ExceotionDAO {
+        return movieDao.getAllMovies();
+    }
+
+    @Override
     public void addMovie(String name, String filepath) throws ExceotionDAO {
 
     }

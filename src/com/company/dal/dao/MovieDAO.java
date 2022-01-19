@@ -154,6 +154,35 @@ public class MovieDAO {
 
         return selectedItem;
     }
+
+
+    public List<Movie> getRateMovies() throws ExceotionDAO {
+        ArrayList<Movie> movies = new ArrayList<>();
+        try (Connection con = databaseConnector.getConnection()) {
+            Statement statement = con.createStatement();
+            String sql = "SELECT * FROM Movie WHERE Movie.rating > ?";
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int id = rs.getInt("Id");
+                String name = rs.getString("name");
+                Double rating = rs.getDouble("rating");
+                String filelink = rs.getString("filelink");
+                Date lastView = rs.getDate("lastView");
+                Double imdbRating = rs.getDouble("imdbRating");
+
+                Movie movie = new Movie(id, name, rating, imdbRating, filelink, lastView);
+                movie.setCategories(this.catMovDAO.getCatInMovie(id));
+                movies.add(movie);
+            }
+
+
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return movies;
+    }
 }
 
 

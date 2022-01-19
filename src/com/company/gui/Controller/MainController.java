@@ -67,6 +67,8 @@ public class MainController implements Initializable {
 
     private ObservableList<Movie> observableListMovie;
     private ObservableList<Category> observableListCategory;
+    private ObservableList<Movie> observableRateMovie;
+
 
     private MovieModel movieModel = MovieModel.getInstance();
 
@@ -98,6 +100,14 @@ public class MainController implements Initializable {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+
+        // After Rating
+        try {
+            observableRateMovie = movieModel.getRateMovies();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
 
         moviesTabelView.setItems(observableListMovie);
         movieNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -259,11 +269,14 @@ public class MainController implements Initializable {
 
     public void clickEditMovie(javafx.event.ActionEvent actionEvent) throws IOException {
         if (moviesTabelView.getSelectionModel().getSelectedIndex() != -1) {
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/company/gui/View/editMovie.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             MovieController mc = loader.getController();
+
             mc.setCurrentMovie(moviesTabelView.getSelectionModel().getSelectedItem());
+
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
@@ -284,7 +297,7 @@ public class MainController implements Initializable {
     }
 
 
-
+/*
     public void rateMovie(ActionEvent actionEvent) {
         String personalRateString = choices.getSelectionModel().getSelectedItem();
         double personalRate = Double.parseDouble(personalRateString);
@@ -302,6 +315,16 @@ public class MainController implements Initializable {
 
 
 
+    }
+
+ */
+
+    public void displayRateMovie (javafx.scene.input.MouseEvent event) {
+        moviesTabelView.getItems().clear();
+        for (Movie m : categoryTableView.getSelectionModel().getSelectedItem().getAllMoviesInCategory()) {
+            moviesTabelView.getItems().add(m);
+
+        }
     }
 }
 

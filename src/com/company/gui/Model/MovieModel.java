@@ -17,8 +17,7 @@ public class MovieModel {
 
     // Static method
     // Static method to create instance of Singleton class
-    public static MovieModel getInstance()
-    {
+    public static MovieModel getInstance() {
         if (single_instance == null) {
             try {
                 single_instance = new MovieModel();
@@ -37,30 +36,34 @@ public class MovieModel {
     }
 
 
-    public ObservableList<Movie> getMovies(){
+    public ObservableList<Movie> getMovies() {
         // System.out.println(movies);
         return movies;
     }
 
+    public ObservableList<Movie> getRateMovies() throws ExceotionDAO {
+        // System.out.println(movies);
+        return (ObservableList<Movie>) movieManger.getRateMovies();
+    }
 
 
-    public void addMovie (String name, String filelink, double imdbRate, double personalRate  ) throws ExceotionDAO{
+    public void addMovie(String name, String filelink, double imdbRate, double personalRate) throws ExceotionDAO {
         movieManger.addMovie(name, filelink, imdbRate, personalRate);
         updatethelist();
 
     }
 
-    public void updateMovie(Movie movie/*, int selectedIndex*/) throws ExceotionDAO{
+    public void updateMovie(Movie movie/*, int selectedIndex*/) throws ExceotionDAO {
         movieManger.updateMovie(movie);
         updatethelist();
     }
 
-    public void deleteMovie (Movie movie) throws ExceotionDAO{
+    public void deleteMovie(Movie movie) throws ExceotionDAO {
         movieManger.deleteMovie(movie);
         updatethelist();
     }
 
-    private void updatethelist() throws ExceotionDAO{
+    private void updatethelist() throws ExceotionDAO {
         movies = FXCollections.observableArrayList();
         movies.addAll(movieManger.getAllMovies());
     }
@@ -71,14 +74,15 @@ public class MovieModel {
     }
 
     public void updateMovieRating(Movie selectedItem, Double newRating) throws ExceotionDAO {
-        try{
+        try {
             movieManger.updateMovieRating(selectedItem, newRating);
             updatethelist();
+
         } catch (ExceotionDAO exceotionDAO) {
             exceotionDAO.printStackTrace();
         }
+
+
     }
-
-
 }
 

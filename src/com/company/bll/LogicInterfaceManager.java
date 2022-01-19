@@ -11,47 +11,26 @@ public interface LogicInterfaceManager {
 
     //Movie
     List<Movie> getAllMovies() throws ExceotionDAO;
-
+    List<Movie> getRateMovies() throws ExceotionDAO;
 
     void addMovie(String name, String filepath, Double rating, Double imbdRating) throws ExceotionDAO;
-
     void updateMovie (Movie movie) throws ExceotionDAO;
-
     void deleteMovie (Movie movie) throws ExceotionDAO;
 
     // method to change the rate
     Movie changeRate (Movie movie , Double newRate) throws ExceotionDAO;
-
     // method to change the date
-
     Movie changeDate (Movie movie) throws ExceotionDAO;
-
    public ObservableList<Movie> searchMovie(ObservableList<Movie> currentMovies, String movieToFind);
-
-
     //Category
     List<Category> getAllCategory() throws ExceotionDAO;
-
-
     void addCategory (String name ) throws ExceotionDAO;
-
     void updateCategory (Category category) throws ExceotionDAO;
-
     void deleteCategory (Category category) throws ExceotionDAO;
-
-
     public List<Movie> GetMovieInCat(int Id) throws ExceotionDAO;
-
     public void addMovieToCat(Category category , Movie movie) throws ExceotionDAO;
-
-
     public  void removeMovieFromCategory ( Movie movie)  throws ExceotionDAO;
-
-
     public void removeFromCategory (Category category , Movie movie)throws ExceotionDAO;
-
-
     public void removeFromCat (Category category) throws ExceotionDAO;
-
     public Movie updateMovieRating(Movie selectedItem, Double newRating) throws ExceotionDAO;
 }

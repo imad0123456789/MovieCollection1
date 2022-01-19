@@ -31,6 +31,10 @@ public class Manger implements LogicInterfaceManager {
         return dalManager.getAllMovies();
     }
 
+    @Override
+    public List<Movie> getRateMovies() throws ExceotionDAO {
+        return dalManager.getAllMovies();
+    }
 
 
     @Override

@@ -9,6 +9,7 @@ import java.util.List;
 public interface DALMovie {
 
     List<Movie> getAllMovies() throws ExceotionDAO;
+    List<Movie> getRateMovies() throws ExceotionDAO;
 
     void add (Movie movie) throws ExceotionDAO;
 

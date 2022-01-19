@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IDALManager {
     List<Movie> getAllMovies() throws ExceotionDAO;
+    List<Movie> getRateMovies() throws ExceotionDAO;
 
     void addMovie (String name, String filepath) throws ExceotionDAO;
 
