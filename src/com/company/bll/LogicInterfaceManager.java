@@ -11,7 +11,7 @@ public interface LogicInterfaceManager {
 
     //Movie
     List<Movie> getAllMovies() throws ExceotionDAO;
-    List<Movie> getRateMovies() throws ExceotionDAO;
+    List<Movie> getRateMovies(String minRating) throws ExceotionDAO;
 
     void addMovie(String name, String filepath, Double rating, Double imbdRating) throws ExceotionDAO;
     void updateMovie (Movie movie) throws ExceotionDAO;

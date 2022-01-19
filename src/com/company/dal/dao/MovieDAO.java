@@ -6,6 +6,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class MovieDAO {
@@ -156,12 +157,23 @@ public class MovieDAO {
     }
 
 
-    public List<Movie> getRateMovies() throws ExceotionDAO {
+    public List<Movie> getRateMovies(String minRating) throws ExceotionDAO {
+
+        java.util.Date utilDate = new  java.util.Date();  // Convert it to java.sql.Date
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(utilDate ); // your date (java.util.Date)
+        cal.add(Calendar.DAY_OF_MONTH, -6); // You can -/+ x months here to go back in history or move forward.
+
+        java.sql.Date date = new java.sql.Date(cal.getTime().getTime());
         ArrayList<Movie> movies = new ArrayList<>();
         try (Connection con = databaseConnector.getConnection()) {
-            Statement statement = con.createStatement();
-            String sql = "SELECT * FROM Movie WHERE Movie.rating > ?";
-            ResultSet rs = statement.executeQuery(sql);
+            String sql = "SELECT * FROM Movie WHERE Movie.rating >= ? and Movie.lastview >= ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, Integer.parseInt(minRating));
+            pst.setDate(2, date);
+
+            ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("Id");
                 String name = rs.getString("name");

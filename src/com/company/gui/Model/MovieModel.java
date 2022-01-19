@@ -41,9 +41,12 @@ public class MovieModel {
         return movies;
     }
 
-    public ObservableList<Movie> getRateMovies() throws ExceotionDAO {
+    public ObservableList<Movie> getRateMovies(String minRating) throws ExceotionDAO {
         // System.out.println(movies);
-        return (ObservableList<Movie>) movieManger.getRateMovies();
+
+        ObservableList<Movie> RateMoviesmovies = FXCollections.observableArrayList();
+        RateMoviesmovies.addAll( movieManger.getRateMovies(minRating));
+        return RateMoviesmovies;
     }
 
 

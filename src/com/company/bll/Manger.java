@@ -10,7 +10,7 @@ import javafx.collections.ObservableList;
 
 import java.util.List;
 
-public class Manger implements LogicInterfaceManager {
+public class Manger extends DalManager implements LogicInterfaceManager {
 
     private final IDALManager dalManager;
 
@@ -31,9 +31,8 @@ public class Manger implements LogicInterfaceManager {
         return dalManager.getAllMovies();
     }
 
-    @Override
-    public List<Movie> getRateMovies() throws ExceotionDAO {
-        return dalManager.getAllMovies();
+    public List<Movie> getRateMovies(String minRating) throws ExceotionDAO {
+        return dalManager.getRateMovies(minRating);
     }
 
 

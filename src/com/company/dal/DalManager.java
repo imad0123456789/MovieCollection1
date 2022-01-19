@@ -29,8 +29,8 @@ public class DalManager implements IDALManager{
     }
 
     @Override
-    public List<Movie> getRateMovies() throws ExceotionDAO {
-        return movieDao.getAllMovies();
+    public List<Movie> getRateMovies(String minRating) throws ExceotionDAO {
+        return movieDao.getRateMovies( minRating);
     }
 
     @Override

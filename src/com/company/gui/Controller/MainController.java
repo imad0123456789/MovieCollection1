@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,8 +35,7 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
 
     public TableColumn<Movie, Integer> moviesInCategory;
-    @FXML
-    private Button NewMovie;
+    public Label label;
     @FXML
     private TableColumn<Movie, String> CatMovieName;
     @FXML
@@ -57,11 +57,8 @@ public class MainController implements Initializable {
     @FXML
     private TableView<Movie> movieInPlaylist;
     @FXML
-    private Button PlayBut;
-    @FXML
-    private Button removeMovieBut;
-    @FXML
     private ComboBox<String> choices;
+   
 
 
 
@@ -103,7 +100,7 @@ public class MainController implements Initializable {
 
         // After Rating
         try {
-            observableRateMovie = movieModel.getRateMovies();
+            observableRateMovie = movieModel.getRateMovies("2");
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -156,6 +153,7 @@ public class MainController implements Initializable {
         movieInPlaylist.getItems().clear();
         for (Movie m : categoryTableView.getSelectionModel().getSelectedItem().getAllMoviesInCategory()) {
             movieInPlaylist.getItems().add(m);
+            label.setText("");
 
         }
     }
@@ -178,6 +176,8 @@ public class MainController implements Initializable {
         movieInPlaylist.getItems().clear();
         for (Movie m : categoryTableView.getSelectionModel().getSelectedItem().getAllMoviesInCategory()) {
             movieInPlaylist.getItems().add(m);
+            label.setText("");
+
         }
     }
 
@@ -217,14 +217,15 @@ public class MainController implements Initializable {
 
 
         private void play() throws IOException, ExceotionDAO {
+            label.setText(movieInPlaylist.getSelectionModel().getSelectedItem().getName() + " is now playing");
 
-        //Desktop.getDesktop().open(new File(movieInPlaylist.getSelectionModel().getSelectedItem().getFilelink()));
         Desktop.getDesktop().open(new File(movieInPlaylist.getSelectionModel().getSelectedItem().getFilelink()));
+
         movieModel.changeLastViewed(movieInPlaylist.getSelectionModel().getSelectedItem());
+
         refreshMovie(false);
 
 
-        //movieModel.updateMovie(movieInPlaylist.getSelectionModel().getSelectedItem(), movieInPlaylist.getSelectionModel().getSelectedIndex());
     }
 
 
@@ -297,7 +298,7 @@ public class MainController implements Initializable {
     }
 
 
-/*
+
     public void rateMovie(ActionEvent actionEvent) {
         String personalRateString = choices.getSelectionModel().getSelectedItem();
         double personalRate = Double.parseDouble(personalRateString);
@@ -317,12 +318,22 @@ public class MainController implements Initializable {
 
     }
 
- */
+
 
     public void displayRateMovie (javafx.scene.input.MouseEvent event) {
         moviesTabelView.getItems().clear();
         for (Movie m : categoryTableView.getSelectionModel().getSelectedItem().getAllMoviesInCategory()) {
             moviesTabelView.getItems().add(m);
+
+        }
+    }
+
+    public void filterRateMovie(ActionEvent actionEvent) throws ExceotionDAO {
+        String comboboxchoices = choices.getSelectionModel().getSelectedItem();
+        moviesTabelView.getItems().clear();
+        for (Movie m : movieModel.getRateMovies(comboboxchoices)) {
+            moviesTabelView.getItems().add(m);
+            label.setText("");
 
         }
     }

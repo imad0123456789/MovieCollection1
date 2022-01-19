@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -31,22 +30,23 @@
           <TableColumn fx:id="CatMovieName" prefWidth="270.0" text="Movie Title" />
         </columns>
       </TableView>
-      <Button layoutX="728.0" layoutY="62.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" style="-fx-background-radius: 100;" text="🔎" />
-      <Label layoutX="573.0" layoutY="41.0" prefHeight="25.0" prefWidth="142.0" text="Movies Search" />
-      <TextField layoutX="571.0" layoutY="66.0" />
       <Button layoutX="389.0" layoutY="349.0" mnemonicParsing="false" onAction="#addMovieToCategory" prefHeight="25.0" prefWidth="51.0" text="⬅" />
       <Button fx:id="NewMovie" layoutX="468.0" layoutY="557.0" mnemonicParsing="false" onAction="#clickNewMovie" text="New" />
       <Button layoutX="522.0" layoutY="557.0" mnemonicParsing="false" onAction="#deleteMovie" text="Delete" />
        <Button fx:id="NewCategory" layoutX="40.0" layoutY="557.0" mnemonicParsing="false" onAction="#clickNewCategory" text="New" />
        <Button layoutX="89.0" layoutY="557.0" mnemonicParsing="false" onAction="#deleteCategory" text="Delete" />
       <Button layoutX="587.0" layoutY="557.0" mnemonicParsing="false" onAction="#clickEditMovie" text="Update" />
-      <Button fx:id="PlayBut" layoutX="89.0" layoutY="25.0" minWidth="35.0" mnemonicParsing="false" onAction="#playMovie" prefHeight="82.0" prefWidth="82.0" style="-fx-background-radius: 100;" text="▶">
+      <Button fx:id="PlayBut" layoutX="171.0" layoutY="25.0" minWidth="35.0" mnemonicParsing="false" onAction="#playMovie" prefHeight="82.0" prefWidth="82.0" style="-fx-background-radius: 100;" text="▶">
          <font>
             <Font size="36.0" />
          </font>
       </Button>
       <Button fx:id="removeMovieBut" layoutX="202.0" layoutY="557.0" mnemonicParsing="false" onAction="#removeMovie" prefHeight="25.0" prefWidth="101.0" text="Remove Movie" />
-      <Button fx:id="rateMovie" layoutX="630.0" layoutY="105.0" mnemonicParsing="false" onAction="#rateMovie" prefHeight="25.0" prefWidth="90.0" text="Filter by rate" />
-      <ComboBox fx:id="choices" layoutX="728.0" layoutY="105.0" prefHeight="25.0" prefWidth="55.0" />
+      <Button fx:id="rateMovie" layoutX="466.0" layoutY="105.0" mnemonicParsing="false" onAction="#filterRateMovie" prefHeight="25.0" prefWidth="101.0" text="Filter by rate 🔎" />
+      <ComboBox fx:id="choices" layoutX="579.0" layoutY="105.0" prefHeight="25.0" prefWidth="55.0" />
+      <Label fx:id="label" layoutX="388.0" layoutY="49.0" prefHeight="33.0" prefWidth="445.0" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
    </children>
 </AnchorPane>
